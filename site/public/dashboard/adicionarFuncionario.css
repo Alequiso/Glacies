@@ -1,0 +1,65 @@
+.subTitle{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content h4{
+    text-align: center;
+}
+
+.form{
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    width: 400px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+.content input{
+    margin-bottom: 2rem;
+    outline: none;
+    border: none;
+    padding: 10px 10px;
+    border-bottom: 2px solid var(--blue-gray);
+    background-color: var(--blue-darkest);
+    color: var(--blue-white);
+}
+
+.content .input_user{
+    background: url(../assets/icons/user\ \(1\).png) no-repeat left / 1.5em;
+    padding-left: 35px;
+}
+
+.content .input_email{
+    background: url(../assets/icons/arroba.png) no-repeat left / 1.5em;
+    padding-left: 35px;
+}
+
+.content .input_pass{
+    background: url(../assets/icons/key\ \(1\).png) no-repeat left / 1.6em;
+    padding-left: 35px;
+}
+
+.content .input_pass_2{
+    background: url(../assets/icons/key\ \(2\).png) no-repeat left / 1.6em;
+    padding-left: 35px;
+}
+
+.content button{
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: var(--blue-baby);
+    color: var(--blue-white);
+    font-weight: 600;
+    cursor: pointer;
+}

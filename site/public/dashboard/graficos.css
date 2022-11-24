@@ -1,0 +1,58 @@
+
+.dash{
+    height: 170vh;
+}
+
+/* CHARTJS */
+.grafico{
+    height: 70vh;
+    background-color: var(--blue-dark);
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+.container{
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.graph{
+    height: 80%;
+    width: 100%;
+}
+.selectFreezer{
+     outline: none; 
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    background: none;
+    background-color: var(--blue-darkest);
+    color: #fafafa;
+    margin:5px; 
+    
+}
+.selectFreezer option{
+    border-radius:5px;
+
+}
+/* HISTORICO DE ALERTAS */
+.historico{
+    height: 70vh;
+    background-color: var(--blue-dark);
+    margin-top: 20px;
+    border-radius: 5px;
+}
+.linha{
+    height: 11.11%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.l2{
+    background-color: var(--blue-sea);
+}

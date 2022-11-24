@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="../style/global.style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="../assets/logo/logo-glacies.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="../js/script.js"></script>
+   
+</head>
+
+<body onload="obterdados(), atualizacaoPeriodica()">
+    <div class="dash">
+        <nav class="navegacao">
+
+            <div class="logoNav">
+                <img height="70px" src="../assets/logo/logo-glacies.png" alt="Logo do projeto - Floco de neve" />
+                <h2>GLACIES</h2>
+            </div>
+            <div class="btnNav">
+                <span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </div>
+            <div class="legendaNav">
+                Navegação
+            </div>
+            <div onclick="cards()" class="optionNav">
+                Cards
+            </div>
+            <div onclick="graficos()" class="optionNav">
+                Gráficos
+            </div>
+            <div onclick="avisos()" class="optionNav">
+                Avisos
+            </div>
+            <div class="optionNav" onclick="adicionarFuncionario()">
+                Adicionar funcionario
+            </div>
+            <div class="legendaNav">
+                Precisa de ajuda?
+            </div>
+            <div onclick="suporte()" class="optionNav">
+                Suporte
+            </div>
+
+
+        </nav>
+        <main class="main">
+            <header class="header">
+                <div class="tituloPagina">
+                    <h1>Dashboard - Unidade Paulista</h1>
+                </div>
+                <span onclick="sair()" class="material-symbols-outlined">
+                    logout
+                </span>
+            </header>
+
+            <section class="termometro">
+                <div class="box critico">
+                    <h2>Crítico</h2>
+                    <span class="temperatura"> -20°C</span>
+                </div>
+                <div class="box alerta">
+                    <h2>Alerta</h2>
+                    <span class="temperatura">-19°C</span>
+                </div>
+                <div class="box ideal">
+                    <h2>Ideal</h2>
+                    <span class="temperatura idealTemp">-18°C / -16°C</span>
+                </div>
+                <div class="box alerta">
+                    <h2>Alerta</h2>
+                    <span class="temperatura">-15°C</span>
+                </div>
+                <div class="box critico">
+                    <h2>Crítico</h2>
+                    <span class="temperatura">-14°C</span>
+                </div>
+            </section>
+
+            <section class="cards">
+                <div class="container">
+                    <div onclick="direcionarGrafico('graphicFreezer1')" id="card_1" class="card c1">
+                        <h2>Freezer 1</h2>
+                        <span class="temperaturaCard" id="tempFreezer1">-25°C</span>
+                        <div class="atualizacao">
+                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                        </div>
+                    </div>
+                    <div onclick="direcionarGrafico('graphicFreezer2')" id="card_2" class="card c2">
+                        <h2>Freezer 2</h2>
+                        <span class="temperaturaCard" id="tempFreezer2">-22°C</span>
+                        <div class="atualizacao">
+                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                        </div>
+                    </div>
+                    <div onclick="direcionarGrafico('graphicFreezer3')" id="card_3" class="card c3">
+                        <h2>Freezer 3</h2>
+                        <span class="temperaturaCard" id="tempFreezer3">-19°C</span>
+                        <div class="atualizacao">
+                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                        </div>
+                    </div>
+                    <div onclick="direcionarGrafico('graphicFreezer4')" id="card_4" class="card c4">
+                        <h2>Freezer 4</h2>
+                        <span class="temperaturaCard" id="tempFreezer4">-18°C</span>
+                        <div class="atualizacao">
+                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
+<script>
+    
+
+function direcionarGrafico(freezer){
+
+if(freezer == 'graphicFreezer1'){
+    window.location = './graficos.html';
+} else if(freezer == 'graphicFreezer2'){
+    window.location = './graficos2.html';
+} else if(freezer == 'graphicFreezer3'){
+    window.location = './graficos3.html';
+} else if(freezer == 'graphicFreezer4'){
+    window.location = './graficos4.html';
+}
+
+}
+
+function atualizacaoPeriodica() {
+obterdados(1);
+obterdados(2);
+obterdados(3);
+obterdados(4);
+
+// function sendData() {
+// 	var http = new XMLHttpRequest();
+// 	http.open('POST', 'http://localhost:3000/api/sendData', false);
+// 	http.send(null);
+// }
+
+setInterval(() => {
+	// sendData();
+    // console.log('sendData falso')
+}, 7000);
+setTimeout(atualizacaoPeriodica, 8000);
+}
+
+function obterdados(idFreezer) {
+fetch(`/medidas/tempo-real/${idFreezer}`)
+    .then(resposta => {
+
+        if (resposta.ok) {
+            resposta.json().then(resposta => {
+
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                var dados = {
+                    temperatura: resposta[0].temperatura,
+                }
+
+                alertar(resposta[0].temperatura, idFreezer);
+            });
+        } else {
+
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do freezer p/ gráfico: ${error.message}`);
+    });
+
+}
+
+
+function alertar(temperatura, idFreezer) {
+var limites = {
+    muito_quente: -14,
+    quente: -15,
+    ideal: -17,
+    frio: -19,
+    muito_frio: -20
+};
+
+var classe_temperatura = 'card';
+
+if (temperatura >= limites.muito_quente) {
+    classe_temperatura = 'card critico';
+    console.log("caiu no 1")
+    
+}
+else if (temperatura < limites.muito_quente && temperatura >= limites.quente) {
+    classe_temperatura = 'card alerta';
+    console.log("caiu no 2")
+}
+else if (temperatura < limites.quente && temperatura > limites.frio) {
+    classe_temperatura = 'card ideal';
+    console.log("caiu no 3")
+}
+else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
+    classe_temperatura = 'card alerta';
+    console.log("caiu no 4")
+}
+else if (temperatura < limites.muito_frio) {
+    classe_temperatura = 'card critico';
+    console.log("caiu no 5")
+}
+
+var card;
+
+if (idFreezer == 1) {
+    tempFreezer1.innerHTML = temperatura + "°C";
+    card = card_1
+} else if (idFreezer == 2) {
+    tempFreezer2.innerHTML = temperatura + "°C";
+    card = card_2
+} else if (idFreezer == 3) {
+    tempFreezer3.innerHTML = temperatura + "°C";
+    card = card_3
+} else if (idFreezer == 4) {
+    tempFreezer4.innerHTML = temperatura + "°C";
+    card = card_4
+}
+
+// alterando
+card.className = classe_temperatura;
+
+}
+
+
+
+</script>

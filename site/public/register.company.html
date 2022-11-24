@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glacies | Cadastro Empresarial</title>
+    <link rel="stylesheet" href="./style/global.style.css">
+    <link rel="stylesheet" href="./style/register.style.css">
+    <link rel="stylesheet" href="./style/style.company.css">
+    <link rel="shortcut icon" href="./assets/logo/ice-favicon.png" type="image/x-icon">
+    <script src="./js/script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    
+</head>
+<body>
+    <div class="container">
+        <main>
+            <div class="box_cadastro">
+                <div class="caixa_formulario">
+                    <h1>CADASTRO EMPRESARIAL</h1>
+                        <input class="input_user" type="text" placeholder="Nome Fantasia" id="iptNome">
+                        <input class="input_email" type="email" placeholder="CNPJ" id="iptCNPJ">
+                        <input class="input_pass" type="text" placeholder="Responsável" id="iptResponsavel">
+                        <input class="input_pass_2" type="text" placeholder="Telefone" id="iptTel">
+                        <p>Já possui cadastro? Faça login clicando <b onclick="voltar_login()"></bonclick>aqui!</b></p>
+                        <button onclick="cadastrar_empresa()">Avançar</button>                  
+                </div>
+                
+            </div>
+        </main>
+        <div class="background">
+            <div class="sorvete">
+                <img class="img_sorvete" src="./assets/brown/background/brown-ice-cream.png" alt="Sorvete de chocolate">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+        // Bloquear números do input do nome fantasia
+        iptNome.addEventListener("keypress", function(e) {
+            var keyCode = (e.keyCode ? e.keyCode : e.which);
+        
+        if (keyCode > 47 && keyCode < 58) {
+            e.preventDefault();
+        }
+        });
+
+        // Bloquear números no input responsável
+        iptResponsavel.addEventListener("keypress", function(e) {
+            var keyCode = (e.keyCode ? e.keyCode : e.which);
+        
+        if (keyCode > 47 && keyCode < 58) {
+            e.preventDefault();
+        }
+        });
+
+        $("#iptTel").mask("(00) 0000-0000");
+        $("#iptCNPJ").mask("00.000.000/0000-00");
+
+        // API
+
+        function cadastrar_empresa() {
+
+        var nomeVar = iptNome.value;
+        var cnpjVar = iptCNPJ.value;
+        var responsavelVar = iptResponsavel.value;
+        var telefoneVar = iptTel.value;
+        
+
+        if (nomeVar == "" || cnpjVar == "" || responsavelVar == "" || telefoneVar == "" ) {
+            swal("Erro!", "Preencha todos os campos", "error");
+
+            return false;
+        }
+        else {
+        fetch("/usuarios/cadastrar_empresa", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nomeServer: nomeVar,
+                cnpjServer: cnpjVar,
+                responsavelServer: responsavelVar,
+                telefoneServer: telefoneVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                swal("Cadastro realizado com sucesso!", " Redirecionando para tela de Login...", "success");
+                resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+
+                sessionStorage.ID_EMPRESA = json.insertId;
+                
+                setTimeout(function () {
+                    window.location = "register.user.html";
+                }, 2000); // apenas para exibir o loading
+
+            });
+            
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            
+        });
+        
+        return false;
+    }
+}
+</script>

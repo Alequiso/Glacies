@@ -1,0 +1,77 @@
+.background {
+    background-image: url(../assets/blue/background/blue-background.png); /* imagem das ondas azuis */
+}
+
+.caixa_formulario .input_user {
+    background: url(../assets/blue/icons/blue-user.png) no-repeat left / 1.0em;
+    /* ÍCONE: url, não repetir a imagem, alinhado a esquerda / tamanho do ícone */
+    padding-left: 28px;
+    outline: none;
+    border-color: #BCC4D8;
+}
+
+.caixa_formulario .input_email {
+    background: url(../assets/blue/icons/blue-email.png) no-repeat left / 1.0em;
+    /* ÍCONE: url, não repetir a imagem, alinhado a esquerda / tamanho do ícone */
+    padding-left: 28px;
+    outline: none;  
+    border-color: #BCC4D8;
+}
+
+.caixa_formulario .input_pass {
+    background: url(../assets/blue/icons/blue-key.png) no-repeat left / 1.2em;
+    /* ÍCONE: url, não repetir a imagem, alinhado a esquerda / tamanho do ícone */
+    padding-left: 28px;
+    outline: none;
+    border-color: #BCC4D8;
+}
+
+.caixa_formulario .input_pass_2 {
+    background: url(../assets/blue/icons/blue-key-outlined.png) no-repeat left / 1.2em;
+    /* ÍCONE: url, não repetir a imagem, alinhado a esquerda / tamanho do ícone */
+    padding-left: 28px;
+    outline: none;
+    border-color: #BCC4D8;
+}
+
+.caixa_formulario h1 {
+    color: var(--blue-pen);
+    display: flex;
+    justify-content: center;
+}
+
+.caixa_formulario button {
+    background-color: var(--blue-baby);
+    cursor: pointer;
+    border-radius: 135px;
+}
+
+.caixa_formulario .voltar{
+    margin-top: 20px;
+    font-size: 14px;
+    font-family: arial;
+    text-align: center;
+    color: var(--blue-pen);
+}
+.caixa_formulario .voltar:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.caixa_formulario{
+    display: flex;
+    justify-content: center;
+    width: 70%;
+}
+
+.box_cadastro {
+
+    background-color: rgba(51, 89, 165, 0.10);
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width:50%;
+    border-radius: 15px;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.15);
+}

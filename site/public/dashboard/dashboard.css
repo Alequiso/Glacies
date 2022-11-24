@@ -1,0 +1,188 @@
+body{
+    background-color: var(--blue-darkest);
+    color: white;
+    position: relative;
+}
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+    margin-left: 10px; 
+    cursor: pointer;
+  }
+  
+#report {
+    color: #D76802;
+}
+
+.dash{
+    height: 100vh;
+    width: 98.5vw;
+    display: flex;
+}
+
+/* BARRA DE NAVEGAÇÃO */
+.navegacao{
+    width: 22%;
+    height: 100%;
+    padding: 20px;
+    background-color: var(--blue-dark);
+    position: fixed;
+    
+}
+.logoNav{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ h2{
+    margin: 0;
+}
+.btnNav{
+    width: 100%;    
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    cursor: default;
+    justify-content: center;
+    color: var(--blue-baby);
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.legendaNav{
+    margin-top: 15px;
+    color: var(--blue-baby);
+    cursor: default;
+}
+.optionNav{
+    margin-top: 20px;
+    cursor: pointer;
+}
+.optionNav:hover{
+    color: var(--blue-baby);
+    transition: all 0.5s;
+}
+/* DASHBOARD */
+.main{
+    
+    height: 100%;
+    width: 77%;
+    padding: 20px;
+    position: absolute;
+    right: 0;
+}
+.header{
+    height: 9%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tituloPagina{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+}
+.tituloPagina h1{
+    display: inline;
+}
+
+/* BOX DE TERMOMETRO*/
+.termometro{
+    height: 20vh;
+    align-self: center;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+.box{
+    height: 100%;
+    width: 17%;
+    background-color: var(--blue-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:    center;
+    border-radius: 5px;
+}
+.box h2{
+    margin: 7px;
+}
+.ideal{
+    background-color: rgb(31, 77, 31);
+    
+}
+
+.alerta{
+    background-color:var(--yellow);
+}
+.critico{
+    background-color: rgb(173, 22, 22);
+}
+.atualizacao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5px;
+    color: var(--blue-baby);
+    
+}
+.temperatura{
+    font-size: 2.8em;
+    font-weight: 600;
+}
+.idealTemp{
+    font-size: 1.68em;
+}
+
+
+/* CARDS */
+.cards{
+    height: 70vh;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+
+}
+.cards .container{
+    height: 100%;
+    width: 95%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card{
+    background-color: var(--blue-dark);
+    height:40%;
+    width: 45%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+
+}
+.temperaturaCard{
+    font-size: 2.5em;
+    font-weight: 600;
+
+}
+.critico{
+    outline: rgb(173, 22, 22) 3px solid;
+    box-shadow: inset 4px 5px 20px 10px rgba(173, 22, 22, 0.25);
+}
+.ideal{
+    outline: rgb(38, 116, 38) 3px solid;
+    box-shadow: inset 4px 5px 20px 10px rgba(38, 116, 38, 0.25);
+}
+.alerta{
+    outline: var(--yellow) 3px solid;
+    box-shadow: inset 4px 5px 20px 10px rgba(216, 163, 26, 0.25);
+}

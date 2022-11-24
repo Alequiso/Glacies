@@ -1,0 +1,81 @@
+/* Sempre que estiverem com dúvidas sobre o que for o quê
+procurem a tag no inspecionar do navegador, vai mostrar o que é
+o container, o main, o background, e qual espaço ele ocupa. */
+
+/* Container é uma caixa que corresponde a 100% da tela,
+por isso width e height com valores de 100 vh/vw. */
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+/* Main e Background são as divs filhas do container, com o display: flex
+ativado lá no container, elas foram possibilitadas de ficarem uma ao lado da outra */
+
+main {
+    width: 60%; /* ocupa 60% de largura da tela */
+    height: 100vh; /* 100% de altura da tela */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.background {
+    width: 40%; /* ocupa os outros 40% restantes de largura da tela */
+    height: 100vh; /* 100% de altura da tela */
+    background-size: contain;
+    background-size: 100% 100%; /* com esses valores, a imagem ocupa 100% da div "background" */
+    display: flex; 
+    align-items: flex-end; /* Alinha a sua div filha (.sorvete) para baixo */
+}
+
+/* Divs para inserir a imagem do sorvete (filhas da div background) */
+.sorvete {
+    width: 100%; /* ocupará 100% de largura da div background */
+    height: 90%; /* está ocupando 90% de altura da div background */
+    display: flex;
+    align-items: center;  /* Centraliza a sua div filha (.img_sorvete)*/
+}
+
+.img_sorvete {
+    height: fit-content; /* Ajusta a imagem ao tamanho da div */
+    width: 330px; /* Tamanho que a div terá (consequentemente, tamanho que a imagem também terá) */
+    margin-left: 23%; /* margem à esquerda usada apenas para deixar a imagem exatamente na posição que deveria */
+}
+
+/* A partir daqui, todas as divs são filhas do MAIN */
+.caixa_formulario {
+    width: 40%; /* Ocupa 40% da largura do MAIN */
+    margin-right: 0px; /* margem à direita usada apenas para deixar a div exatamente na posição que deveria */
+    display: flex;
+    flex-direction: column; /* colocou todos os elementos dela (h1, inputs e button) em coluna, na vertical */
+;
+
+}
+
+.caixa_formulario h1 {
+    margin-bottom: 10px; /* distanciou o h1 do restante */
+    font-size: 40px; /* Tamanho da fonte */
+    text-align: center; /* Centralizou o texto */
+}
+
+.caixa_formulario input {
+    margin-top: 20px; /* distanciou um input do outro */
+    padding: 8px 0px; /* "engordou" os inputs verticalmente, e nada horizontalmente */
+    font-size: 16px; /* tamanho da fonte */
+    border-top: none;
+    border-left: none;
+    border-right: none; /* os 3 borders none foram para retirar as bordas e manter apenas a borda inferior */
+    border-color: black; /* cor da borda inferior */
+    outline: none;
+}
+
+.caixa_formulario button {
+    margin-top: 20px; /* distanciou o botão das inputs */
+    padding: 8px 0px; /* "engordou" o botão verticalmente, nada horizontalmente */
+    border-radius: 10px; /* arredondou as bordas */
+    border: none; /* retirou um contorno de borda padrão e feio */
+    color: white; /* cor do texto do botão */
+    font-weight: bold; /* peso da fonte do botão (negrito/bold) */
+}
