@@ -7,13 +7,12 @@ CREATE TABLE Empresa(
 )
 
 CREATE TABLE Usuario(
-	idUsuario INT IDENTITY(1,1),
+	idUsuario INT PRIMARY KEY IDENTITY(1,1),
 	nomeUsuario VARCHAR(45) NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	senha VARCHAR(16) NOT NULL,
 	fkEmpresa INT,
 	FOREIGN KEY (fkEmpresa) REFERENCES Empresa(idEmpresa),
-    PRIMARY KEY (idUsuario, fkEmpresa)
 )
 
 CREATE TABLE Alerta(
@@ -54,4 +53,12 @@ CREATE TABLE alertaSensor(
 	FOREIGN KEY (fkDadoSensor) REFERENCES dadoSensor(idDadoSensor),
 	dtAlerta DATETIME DEFAULT CURRENT_TIMESTAMP,
     temperatura DECIMAL(10,2)
+)
+
+CREATE TABLE Aviso (
+	idAviso INT PRIMARY KEY IDENTITY(1,1),
+	titulo VARCHAR(100),
+	descricao VARCHAR(250),
+	fkUsuario INT,
+	FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario)
 )
