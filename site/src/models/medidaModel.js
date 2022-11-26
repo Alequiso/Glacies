@@ -39,7 +39,7 @@ function buscarMedidasEmTempoReal(idFreezer) {
                     order by id desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select temperatura, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico, fkSensor
+        instrucaoSql = `select temperatura, DATE_FORMAT(dataHora,'%d/%m/%Y %H:%i:%s') as momento_grafico, fkSensor
                         from dadoSensor where fkSensor = ${idFreezer}
                     order by idDadoSensor desc limit 1;`;
     } else {
