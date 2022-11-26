@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/funcoes.js"></script>
+    <script src="../js/script.js"></script>
     <title>Mural de Avisos | Glacies</title>
 </head>
 
@@ -37,7 +38,7 @@
         <div onclick="avisos()" class="optionNav">
             Avisos
         </div>
-        <div class="optionNav">
+        <div onclick="adicionarFuncionario()" class="optionNav">
             Adicionar funcionario
         </div>
         <div class="legendaNav">
@@ -110,7 +111,7 @@
                 window.alert("Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!");
                 window.location = "/dashboard/mural.html";
                 limparFormulario();
-                // finalizarAguardar();
+                
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {
@@ -118,7 +119,7 @@
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            // finalizarAguardar();
+           
         });
 
         return false;
@@ -156,7 +157,7 @@
     }
 
     function atualizarFeed() {
-        //aguardar();
+        
         fetch("/avisos/listar").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
@@ -219,14 +220,13 @@
                         feed.appendChild(divPublicacao);
                     }
 
-                    // finalizarAguardar();
                 });
             } else {
                 throw ('Houve um erro na API!');
             }
         }).catch(function (resposta) {
             console.error(resposta);
-            // finalizarAguardar();
+            
         });
     }
 </script>

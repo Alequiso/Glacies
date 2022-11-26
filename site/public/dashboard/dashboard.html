@@ -148,15 +148,7 @@ obterdados(2);
 obterdados(3);
 obterdados(4);
 
-// function sendData() {
-// 	var http = new XMLHttpRequest();
-// 	http.open('POST', 'http://localhost:3000/api/sendData', false);
-// 	http.send(null);
-// }
-
 setInterval(() => {
-	// sendData();
-    // console.log('sendData falso')
 }, 7000);
 setTimeout(atualizacaoPeriodica, 8000);
 }
@@ -196,17 +188,20 @@ var limites = {
     frio: -19,
     muito_frio: -20
 };
-
+var tipoAlerta = '';
 var classe_temperatura = 'card';
 
 if (temperatura >= limites.muito_quente) {
     classe_temperatura = 'card critico';
     console.log("caiu no 1")
-    
+    tipoAlerta = 1;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 else if (temperatura < limites.muito_quente && temperatura >= limites.quente) {
     classe_temperatura = 'card alerta';
-    console.log("caiu no 2")
+    console.log("caiu no 2");
+    tipoAlerta = 2;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 else if (temperatura < limites.quente && temperatura > limites.frio) {
     classe_temperatura = 'card ideal';
@@ -215,10 +210,14 @@ else if (temperatura < limites.quente && temperatura > limites.frio) {
 else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
     classe_temperatura = 'card alerta';
     console.log("caiu no 4")
+    tipoAlerta = 2;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 else if (temperatura < limites.muito_frio) {
     classe_temperatura = 'card critico';
     console.log("caiu no 5")
+    tipoAlerta = 1;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 
 var card;
@@ -242,6 +241,29 @@ card.className = classe_temperatura;
 
 }
 
+function salvarNoHistorico(temperatura, idFreezer, tipoAlerta) {
+
+    fetch(`/medidas/salvarNoHistorico/${temperatura}/${idFreezer}/${tipoAlerta}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            console.log(temperatura)
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+    });
+
+    return false;
+}
 
 
 </script>
