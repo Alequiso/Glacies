@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Editar Aviso | Glacies</title>
     <link rel="stylesheet" href="../style/global.style.css">
     <link rel="stylesheet" href="edicao-aviso.css">
-    <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet"
@@ -18,74 +17,73 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="../js/script.js"></script>
+    
 </head>
 
 <body onload="listarInfosDeUm()">
-    <nav class="navegacao">
-
-        <div class="logoNav">
-            <img height="70px" src="../assets/logo/logo-glacies.png" alt="Logo do projeto - Floco de neve" />
-            <h2>GLACIES</h2>
-        </div>
-        <div class="btnNav">
-
-            <span class="material-symbols-outlined">dashboard</span>
-            Dashboard
-
-        </div>
-        <div class="legendaNav">
-            Navegação
-        </div>
-        <div onclick="cards()" class="optionNav">
-            Cards
-        </div>
-        <div onclick="graficos()" class="optionNav">
-            Gráficos
-        </div>
-        <div onclick="avisos()" class="optionNav">
-            Avisos
-        </div>
-        <div class="optionNav">
-            Adicionar funcionario
-        </div>
-        <div class="legendaNav">
-            Precisa de ajuda?
-        </div>
-        <div onclick="suporte()" class="optionNav">
-            Suporte
-        </div>
-
-
-
-    </nav>
-    <!-- validarSessao(), -->
-    <div class="boxdescricao">
-        <div class="boxdescricao1">
-            <h1>Editar Aviso</h1> <span onclick="sair()" class="material-symbols-outlined">
-                logout
-            </span>
-        </div>
-        Descrição
-
-        <div>
-            <textarea class="descricao" name="descricao" id="textarea_descricao" maxlength="250" cols="90" rows="10"
-                onkeyup="contadorCaracteres(this.value)"></textarea>
-        </div>
-        <div class="contador-container">
-            <div id="contador250">250</div>
-        </div>
-        <button onclick="editar()">Editar</button>
-    </div>
+    <div class="mural">
+        <nav class="navegacao">
+            <div class="conteudoNav">
+                <div class="logoNav">
+                    <img height="70px" src="../assets/logo/logo-glacies.png" alt="Logo do projeto - Floco de neve" />
+                    <h2>GLACIES</h2>
+                </div>
+                <div class="btnNav">
+                    <span class="material-symbols-outlined">Dashboard</span> Dashboard
+                </div>
+                <div class="legendaNav">
+                    Navegação
+                </div>
+                <div onclick="cards()" class="optionNav">
+                    Cards
+                </div>
+                <div onclick="graficos()" class="optionNav">
+                    Gráficos
+                </div>
+                <div onclick="avisos()" class="optionNav">
+                    Avisos
+                </div>
+                <div class="optionNav" onclick="adicionarFuncionario()">
+                    Adicionar funcionario
+                </div>
+                <div class="legendaNav">
+                    Precisa de ajuda?
+                </div>
+                <div onclick="suporte()" class="optionNav">
+                    Suporte
+                </div>
+            </div>
+        </nav>
+        <!-- validarSessao(), -->
+        <div class="boxcontainer">
+            <div class="titulo">
+                <h1>Editar Aviso</h1>
+                <span onclick="sair()" class="material-symbols-outlined">
+                    logout
+                </span>
+            </div>
+            <form id="form_postagem" class="boxcontainer1" method="post" onsubmit="return editarPost()">
+                <div class="titulosForm">
+                    <h4>Descrição</h4>
+                </div>
+                <textarea name="descricao" class="descricao" id="textarea_descricao" maxlength="250" cols="100"
+                    rows="10" onkeyup="contadorCaracteres(this.value)"></textarea>
+                <div id="contador250" class="contador">
+                    <p>250</p>
+                </div>
+                <button onclick="editarPost()">Editar</button>
+            </form>
 </body>
 
 </html>
 
+<script src="../js/contadorCaracteres.js"></script>
 <script>
     function listarInfosDeUm() {
         console.log("Criar função de trazer informações de post escolhido");
     }
 
-    function editar() {
+    function editarPost() {
         fetch(`/avisos/editar/${sessionStorage.getItem("ID_POSTAGEM_EDITANDO")}`, {
             method: "PUT",
             headers: {
@@ -98,7 +96,7 @@
 
             if (resposta.ok) {
                 window.alert("Post atualizado com sucesso pelo usuario de email: " + sessionStorage.getItem("EMAIL_USUARIO") + "!");
-                window.location = "/dashboard/mural.html"
+                window.location = "mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
             } else {

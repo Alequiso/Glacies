@@ -35,8 +35,8 @@
       <div class="legendaNav">Navegação</div>
       <div onclick="cards()" class="optionNav">Cards</div>
       <div onclick="graficos()" class="optionNav">Gráficos</div>
-      <div class="optionNav">Avisos</div>
-      <div class="optionNav">Adicionar funcionario</div>
+      <div onclick="avisos()" class="optionNav">Avisos</div>
+      <div onclick="adicionarFuncionario()" class="optionNav">Adicionar funcionario</div>
       <div class="legendaNav">Precisa de ajuda?</div>
       <div onclick="suporte()" class="optionNav">Suporte</div>
     </nav>
@@ -70,14 +70,14 @@
         <div class="linha">
           <h2>Histórico de alertas</h2>
         </div>
-        <div class="linha l2"></div>
-        <div class="linha"></div>
-        <div class="linha l2"></div>
-        <div class="linha"></div>
-        <div class="linha l2"></div>
-        <div class="linha"></div>
-        <div class="linha l2"></div>
-        <div class="linha"></div>
+        <div id="linha1" class="linha l2"></div>
+        <div id="linha2" class="linha"></div>
+        <div id="linha3" class="linha l2"></div>
+        <div id="linha4" class="linha"></div>
+        <div id="linha5" class="linha l2"></div>
+        <div id="linha6" class="linha"></div>
+        <div id="linha7" class="linha l2"></div>
+        <div id="linha8" class="linha"></div>
       </section>
     </main>
   </div>
@@ -120,7 +120,7 @@ function exibir(passagemValor){
 
   let proximaAtualizacao;
 
-  // verificar_autenticacao();
+
 
   function obterDadosGrafico(idFreezer) {
  
@@ -193,28 +193,6 @@ function exibir(passagemValor){
         config
     );
 
-    // Adicionando gráfico criado em div na tela
-    // if(freezer == 'graphicFreezer1' ){
-    //   let myChart = new Chart(
-    //     document.getElementById('lineChart'),
-    //     config
-    //     );
-    //   } else if( freezer == 'graphicFreezer2'){
-    //     let myChart = new Chart(
-    //     document.getElementById('lineChart2'),
-    //     config
-    //     );
-    //   } else if( freezer == 'graphicFreezer3'){
-    //     let myChart = new Chart(
-    //     document.getElementById('lineChart3'),
-    //     config
-    //     );
-    //   } else if( freezer == 'graphicFreezer4'){
-    //     let myChart = new Chart(
-    //     document.getElementById('lineChart4'),
-    //     config
-    //     );
-    //   }
 
     setTimeout(() => atualizarGrafico(idFreezer, dados, myChart), 2000);
   }
@@ -230,12 +208,10 @@ function exibir(passagemValor){
           console.log(`Dados atuais do gráfico:`);
           console.log(dados);
 
-          // document.getElementById("avisoCaptura").innerHTML = ""
 
           if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
             console.log("---------------------------------------------------------------")
             console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-            // document.getElementById("avisoCaptura").innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
             console.log("Horário do novo dado capturado:")
             console.log(novoRegistro[0].momento_grafico)
             console.log("Horário do último dado capturado:")
@@ -266,5 +242,63 @@ function exibir(passagemValor){
       });
  
   }
+
+  window.onload=obterdadosHistorico(4);
+
+function obterdadosHistorico(idFreezer) {
+fetch(`/medidas/historico/${idFreezer}`)
+    .then(resposta => {
+
+        if (resposta.ok) {
+            resposta.json().then(resposta => {
+
+               // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                var dados = {
+                    temperatura1: resposta[0].temperatura,
+                    temperatura2: resposta[1].temperatura,
+                    temperatura3: resposta[2].temperatura,
+                    temperatura4: resposta[3].temperatura,
+                    temperatura5: resposta[4].temperatura,
+                    temperatura6: resposta[5].temperatura,
+                    temperatura7: resposta[6].temperatura,
+                    temperatura8: resposta[7].temperatura,
+                    momento1: resposta[0].momento_grafico,
+                    momento2: resposta[1].momento_grafico,
+                    momento3: resposta[2].momento_grafico,
+                    momento4: resposta[3].momento_grafico,
+                    momento5: resposta[4].momento_grafico,
+                    momento6: resposta[5].momento_grafico,
+                    momento7: resposta[6].momento_grafico,
+                    momento8: resposta[7].momento_grafico
+                }
+                
+                plotarHistorico(dados);
+            });
+        } else {
+
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados do freezer p/ gráfico: ${error.message}`);
+    });
+
+}
+
+function plotarHistorico(dados) {
+
+  linha1.innerHTML = 'Alerta emitido em ' + dados.momento1 + ' - Temperatura: ' + dados.temperatura1;
+  linha2.innerHTML = 'Alerta emitido em ' + dados.momento2 + ' - Temperatura: ' + dados.temperatura2;
+  linha3.innerHTML = 'Alerta emitido em ' + dados.momento3 + ' - Temperatura: ' + dados.temperatura3;
+  linha4.innerHTML = 'Alerta emitido em ' + dados.momento4 + ' - Temperatura: ' + dados.temperatura4;
+  linha5.innerHTML = 'Alerta emitido em ' + dados.momento5 + ' - Temperatura: ' + dados.temperatura5;
+  linha6.innerHTML = 'Alerta emitido em ' + dados.momento6 + ' - Temperatura: ' + dados.temperatura6;
+  linha7.innerHTML = 'Alerta emitido em ' + dados.momento7 + ' - Temperatura: ' + dados.temperatura7;
+  linha8.innerHTML = 'Alerta emitido em ' + dados.momento8 + ' - Temperatura: ' + dados.temperatura8;
+
+
+}
+</script>
 
 </script>
