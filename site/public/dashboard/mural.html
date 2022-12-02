@@ -120,9 +120,9 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          window.alert(
-            "Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!"
-          );
+        //   window.alert(
+        //     "Post realizado com sucesso pelo usuario de ID: " + idUsuario + "!"
+        //   );
           window.location = "/dashboard/mural.html";
           limparFormulario();
           // finalizarAguardar();
@@ -206,25 +206,22 @@
 
               // criando e manipulando elementos do HTML via JavaScript
               var divPublicacao = document.createElement("div");
-              var spanID = document.createElement("span");
-              var spanTitulo = document.createElement("span");
-              var spanNome = document.createElement("span");
+              var spanTitulo = document.createElement("div");
+              var spanNome = document.createElement("div");
               var divDescricao = document.createElement("div");
               var divButtons = document.createElement("div");
               var btnEditar = document.createElement("button");
               var btnDeletar = document.createElement("button");
 
-              spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
               spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
               spanNome.innerHTML =
-                "Autor: <b>" + publicacao.nomeUsuario + "</b>";
+                "Responsável: <b>" + publicacao.nomeUsuario + "</b><br>";
               divDescricao.innerHTML =
                 "Descrição: <b>" + publicacao.descricao + "</b>";
               btnEditar.innerHTML = "Editar";
               btnDeletar.innerHTML = "Deletar";
 
               divPublicacao.className = "publicacao";
-              spanTitulo.id = "inputNumero" + publicacao.idAviso;
               spanNome.className = "publicacao-nome";
               spanTitulo.className = "publicacao-titulo";
               divDescricao.className = "publicacao-descricao";
@@ -238,14 +235,13 @@
                 `editar(${publicacao.idAviso})`
               );
 
-              btnDeletar.className = "publicacao-btn-editar";
+              btnDeletar.className = "publicacao-btn-deletar";
               btnDeletar.id = "btnDeletar" + publicacao.idAviso;
               btnDeletar.setAttribute(
                 "onclick",
                 `deletar(${publicacao.idAviso})`
               );
             
-              divPublicacao.appendChild(spanID);
               divPublicacao.appendChild(spanNome);
               divPublicacao.appendChild(spanTitulo);
               divPublicacao.appendChild(divDescricao);
