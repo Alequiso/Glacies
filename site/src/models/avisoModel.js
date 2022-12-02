@@ -14,7 +14,7 @@ function listar() {
             u.senha
         FROM aviso a
             INNER JOIN usuario u
-                ON a.fkUsuario = u.idUsuario;
+                ON a.fkUsuario = u.idUsuario ORDER BY idAviso DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
