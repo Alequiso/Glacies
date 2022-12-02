@@ -6,13 +6,12 @@ function buscarUltimasMedidas(idFreezer, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select top ${limite_linhas}
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        momento,
-                        FORMAT(momento, 'HH:mm:ss') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idFreezer}
-                    order by id desc`;
+         temperatura,   
+         dataHora,
+                        FORMAT(dataHora, 'HH:mm:ss') as momento_grafico
+                    from dadoSensor
+                    where fkSensor = ${idFreezer}
+                    order by idDadoSensor desc`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select temperatura, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico
         from dadoSensor where fkSensor = ${idFreezer} order by idDadoSensor desc limit ${limite_linhas}`;
@@ -31,17 +30,16 @@ function buscarMedidasEmTempoReal(idFreezer) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select top 1
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        CONVERT(varchar, momento, 108) as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idFreezer} 
-                    order by id desc`;
+                        temperatura,   
+                        CONVERT(varchar, dataHora, 108) as momento_grafico, 
+                        fkSensor 
+                        from dadoSensor where fkSensor = ${idFreezer} 
+                    order by idDadoSensor desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select temperatura, DATE_FORMAT(dataHora,'%d/%m/%Y %H:%i:%s') as momento_grafico, fkSensor
-                        from dadoSensor where fkSensor = ${idFreezer}
-                    order by idDadoSensor desc limit 1;`;
+
+        instrucaoSql = `select temperatura, DATE_FORMAT(dataHora,'%H:%i:%s') as momento_grafico, fkSensor from dadoSensor where fkSensor = ${idFreezer} order by idDadoSensor desc limit 1;`;
+
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

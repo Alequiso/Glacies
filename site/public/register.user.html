@@ -43,13 +43,36 @@
 </html>
 
 <script>
-    
+    var empresa = 0;
+    window.onload = listarUltimaEmpresa();
+
+    function listarUltimaEmpresa(){
+        fetch(`/usuarios/listarUltimaEmpresa`)
+        .then(resposta => {
+            if (resposta.ok) {
+                resposta.json().then(resposta => {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    empresa = resposta[0].idEmpresa;
+
+                });
+            } else {
+
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados do freezer p/ gráfico: ${error.message}`);
+        });
+    }
+
     function cadastrar_funcionario() {
 
         var nomeUsuarioVar = input_nomeUsuario.value;
         var emailVar = input_email.value;
         var senhaVar = input_senha.value;
-        const idEmpresaVar = sessionStorage.getItem("ID_EMPRESA");
+        
 
 
         if (nomeUsuarioVar == "" || emailVar == "" || senhaVar == "") {
@@ -63,7 +86,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                idEmpresaServer: idEmpresaVar,
+                idEmpresaServer: empresa,
                 nomeUsuarioServer: nomeUsuarioVar,
                 emailServer: emailVar,
                 senhaServer: senhaVar
