@@ -94,28 +94,28 @@
                         <h2>Freezer 1</h2>
                         <span class="temperaturaCard" id="tempFreezer1">-25°C</span>
                         <div class="atualizacao">
-                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                            <span>Última atualização: <span id="spanMomento1">19/09/2022 - 12:30</span></span>
                         </div>
                     </div>
                     <div onclick="direcionarGrafico('graphicFreezer2')" id="card_2" class="card c2">
                         <h2>Freezer 2</h2>
                         <span class="temperaturaCard" id="tempFreezer2">-22°C</span>
                         <div class="atualizacao">
-                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                            <span>Última atualização: <span id="spanMomento2">19/09/2022 - 12:30</span></span>
                         </div>
                     </div>
                     <div onclick="direcionarGrafico('graphicFreezer3')" id="card_3" class="card c3">
                         <h2>Freezer 3</h2>
                         <span class="temperaturaCard" id="tempFreezer3">-19°C</span>
                         <div class="atualizacao">
-                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                            <span>Última atualização: <span id="spanMomento3">19/09/2022 - 12:30</span></span>
                         </div>
                     </div>
                     <div onclick="direcionarGrafico('graphicFreezer4')" id="card_4" class="card c4">
                         <h2>Freezer 4</h2>
                         <span class="temperaturaCard" id="tempFreezer4">-18°C</span>
                         <div class="atualizacao">
-                            <span>Última atualização: 19/09/2022 - 12:30</span>
+                            <span>Última atualização: <span id="spanMomento4">19/09/2022 - 12:30</span></span>
                         </div>
                     </div>
                 </div>
@@ -148,15 +148,7 @@ obterdados(2);
 obterdados(3);
 obterdados(4);
 
-// function sendData() {
-// 	var http = new XMLHttpRequest();
-// 	http.open('POST', 'http://localhost:3000/api/sendData', false);
-// 	http.send(null);
-// }
-
 setInterval(() => {
-	// sendData();
-    // console.log('sendData falso')
 }, 7000);
 setTimeout(atualizacaoPeriodica, 8000);
 }
@@ -172,9 +164,10 @@ fetch(`/medidas/tempo-real/${idFreezer}`)
 
                 var dados = {
                     temperatura: resposta[0].temperatura,
+                    momento: resposta[0].momento_grafico
                 }
-
-                alertar(resposta[0].temperatura, idFreezer);
+                console.log(dados)
+                alertar(resposta[0].temperatura, dados, idFreezer);
             });
         } else {
 
@@ -188,7 +181,7 @@ fetch(`/medidas/tempo-real/${idFreezer}`)
 }
 
 
-function alertar(temperatura, idFreezer) {
+function alertar(temperatura, dados, idFreezer) {
 var limites = {
     muito_quente: -14,
     quente: -15,
@@ -196,17 +189,20 @@ var limites = {
     frio: -19,
     muito_frio: -20
 };
-
+var tipoAlerta = '';
 var classe_temperatura = 'card';
 
 if (temperatura >= limites.muito_quente) {
     classe_temperatura = 'card critico';
     console.log("caiu no 1")
-    
+    tipoAlerta = 1;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 else if (temperatura < limites.muito_quente && temperatura >= limites.quente) {
     classe_temperatura = 'card alerta';
-    console.log("caiu no 2")
+    console.log("caiu no 2");
+    tipoAlerta = 2;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 else if (temperatura < limites.quente && temperatura > limites.frio) {
     classe_temperatura = 'card ideal';
@@ -215,10 +211,14 @@ else if (temperatura < limites.quente && temperatura > limites.frio) {
 else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
     classe_temperatura = 'card alerta';
     console.log("caiu no 4")
+    tipoAlerta = 2;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 else if (temperatura < limites.muito_frio) {
     classe_temperatura = 'card critico';
     console.log("caiu no 5")
+    tipoAlerta = 1;
+    salvarNoHistorico(temperatura, idFreezer, tipoAlerta);
 }
 
 var card;
@@ -226,15 +226,19 @@ var card;
 if (idFreezer == 1) {
     tempFreezer1.innerHTML = temperatura + "°C";
     card = card_1
+    spanMomento1.innerHTML = dados.momento;
 } else if (idFreezer == 2) {
     tempFreezer2.innerHTML = temperatura + "°C";
     card = card_2
+    spanMomento2.innerHTML = dados.momento;
 } else if (idFreezer == 3) {
     tempFreezer3.innerHTML = temperatura + "°C";
     card = card_3
+    spanMomento3.innerHTML = dados.momento;
 } else if (idFreezer == 4) {
     tempFreezer4.innerHTML = temperatura + "°C";
     card = card_4
+    spanMomento4.innerHTML = dados.momento;
 }
 
 // alterando
@@ -242,6 +246,29 @@ card.className = classe_temperatura;
 
 }
 
+function salvarNoHistorico(temperatura, idFreezer, tipoAlerta) {
+
+    fetch(`/medidas/salvarNoHistorico/${temperatura}/${idFreezer}/${tipoAlerta}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            console.log(temperatura)
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+
+    });
+
+    return false;
+}
 
 
 </script>
