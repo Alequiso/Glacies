@@ -8,6 +8,21 @@ function listar() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function listarUltimaEmpresa() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    select top 1 idEmpresa from empresa order by idEmpresa desc;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listarEmpresa(){
+    var instrucao = `
+    SELECT * FROM Empresa
+    `;
+    return database.executar(instrucao)
+}
 
 function entrar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
@@ -44,4 +59,6 @@ module.exports = {
     cadastrar_empresa,
     cadastrar_funcionario, 
     listar,
+    listarEmpresa,
+    listarUltimaEmpresa
 };

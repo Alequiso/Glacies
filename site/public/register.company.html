@@ -91,23 +91,17 @@
             })
         }).then(function (resposta) {
 
-            console.log("resposta: ", resposta);
-
             if (resposta.ok) {
-                swal("Cadastro realizado com sucesso!", " Redirecionando para tela de Login...", "success");
-                resposta.json().then(json => {
-                console.log(json);
-                console.log(JSON.stringify(json));
-
-                sessionStorage.ID_EMPRESA = json.insertId;
                 
-                setTimeout(function () {
-                    window.location = "register.user.html";
-                }, 2000); // apenas para exibir o loading
+                    swal("Cadastro realizado com sucesso!", " Redirecionando para tela de Login...", "success");
 
-            });
+                    setTimeout(function () {
+                       window.location = "register.user.html";
+                    }, 2000); // apenas para exibir o loading
             
-            } else {
+
+            }
+             else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
