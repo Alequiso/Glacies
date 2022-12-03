@@ -86,7 +86,7 @@
           <div id="contador250" class="contador">
             <p>250</p>
           </div>
-          <button>Enviar</button>
+          <button class="btnEnviar">Enviar</button>
         </form>
         <div class="div-results">
           <div id="feed_container" class="feed-container"></div>
@@ -205,25 +205,22 @@
               var divPublicacao = document.createElement("div");
               var spanTitulo = document.createElement("div");
               var spanNome = document.createElement("div");
+              var spanButtons = document.createElement("div");
               var divDescricao = document.createElement("div");
-              var divButtons = document.createElement("div");
               var btnEditar = document.createElement("button");
               var btnDeletar = document.createElement("button");
 
-              spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+              spanTitulo.innerHTML = `<b>Título:</b> ${publicacao.titulo}`;
               spanNome.innerHTML =
-                "Responsável: <b>" + publicacao.nomeUsuario + "</b><br>";
+                `<b>Responsável:</b> ${publicacao.nomeUsuario}`;
               divDescricao.innerHTML =
-                "Descrição: <b>" + publicacao.descricao + "</b>";
-              btnEditar.innerHTML = "Editar";
-              btnDeletar.innerHTML = "Deletar";
+                `${publicacao.descricao}`;
 
               divPublicacao.className = "publicacao";
               spanNome.className = "publicacao-nome";
+              spanButtons.className = "publicacao-buttons"
               spanTitulo.className = "publicacao-titulo";
               divDescricao.className = "publicacao-descricao";
-
-              divButtons.className = "div-buttons";
 
               btnEditar.className = "publicacao-btn-editar";
               btnEditar.id = "btnEditar" + publicacao.idAviso;
@@ -238,13 +235,13 @@
                 "onclick",
                 `deletar(${publicacao.idAviso})`
               );
-            
+              
+              divPublicacao.appendChild(spanButtons);
               divPublicacao.appendChild(spanNome);
               divPublicacao.appendChild(spanTitulo);
               divPublicacao.appendChild(divDescricao);
-              divPublicacao.appendChild(divButtons);
-              divButtons.appendChild(btnEditar);
-              divButtons.appendChild(btnDeletar);
+              spanButtons.appendChild(btnEditar);
+              spanButtons.appendChild(btnDeletar);
               feed.appendChild(divPublicacao);
             }
 
