@@ -53,13 +53,11 @@ function obterdadosHistorico(idFreezer) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        CONVERT(varchar, momento, 108) as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idFreezer} 
-                    order by id desc`;
+        instrucaoSql = `select top 8
+        temperatura,   
+        CONVERT(varchar, dtAlerta, 100) as momento_grafico 
+                        from alertaSensor where fkSensor = ${idFreezer} 
+                        order by momento_grafico desc`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = ` select DATE_FORMAT(dtAlerta,'%d/%m/%Y %H:%i:%s') as momento_grafico, temperatura from alertaSensor where fkSensor = ${idFreezer} order by momento_grafico desc limit 8;

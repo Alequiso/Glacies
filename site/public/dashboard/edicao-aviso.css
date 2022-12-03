@@ -137,9 +137,6 @@ form {
     justify-content: right;
 }
 
-textarea {
-}
-
 .descricao{
     box-sizing: border-box;
     width: 160vh;
@@ -147,6 +144,7 @@ textarea {
     border: 3px solid #6BA7C8;
     border-radius: 5px;
     color: var(--white);
+    outline: none;
 }
 
 button {

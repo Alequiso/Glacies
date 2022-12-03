@@ -89,6 +89,7 @@
 
   // window.onload = obterDadosGrafico(1);
   window.onload = obterDadosGrafico(1);
+  window.onload= obterdadosHistorico(1);
 
   function aguardarCarregamento() {
     setInterval(() => obterDadosGrafico(1), 2000)
@@ -239,7 +240,7 @@
 
   }
 
-window.onload=obterdadosHistorico(1);
+
 
 function obterdadosHistorico(idFreezer) {
 fetch(`/medidas/historico/${idFreezer}`)
@@ -292,7 +293,6 @@ function plotarHistorico(dados) {
   linha6.innerHTML = 'Alerta emitido em ' + dados.momento6 + ' - Temperatura: ' + dados.temperatura6;
   linha7.innerHTML = 'Alerta emitido em ' + dados.momento7 + ' - Temperatura: ' + dados.temperatura7;
   linha8.innerHTML = 'Alerta emitido em ' + dados.momento8 + ' - Temperatura: ' + dados.temperatura8;
-
 
 }
 </script>

@@ -45,7 +45,7 @@
 <script>
     var empresa = 0;
     window.onload = listarUltimaEmpresa();
-
+    
     function listarUltimaEmpresa(){
         fetch(`/usuarios/listarUltimaEmpresa`)
         .then(resposta => {
@@ -113,5 +113,5 @@
         return false;
         }
         }
-
+        sessionStorage.ID_EMPRESA = empresa;
 </script>
