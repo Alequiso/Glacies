@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="../js/funcoes.js"></script>
     <script src="../js/script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Mural de Avisos | Glacies</title>
   </head>
 
@@ -122,8 +123,10 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-       
-          window.location = "/dashboard/mural.html";
+          swal('Sucesso',`Post publicado com sucesso`, 'success');
+          setTimeout(() => {
+            window.location = "/dashboard/mural.html";
+          },2000)
           limparFormulario();
          
         } else if (resposta.status == 404) {
@@ -160,12 +163,12 @@
     })
       .then(function (resposta) {
         if (resposta.ok) {
-          window.alert(
-            "Post deletado com sucesso pelo usuario de email: " +
-              sessionStorage.getItem("EMAIL_USUARIO") +
-              "!"
+          swal('Sucesso',
+            `Post deletado pelo usuario: ${sessionStorage.getItem("NOME_USUARIO")}`, 'success'
           );
-          window.location = "/dashboard/mural.html";
+          setTimeout(()=> {
+            window.location = "/dashboard/mural.html";
+          }, 2000)
         } else if (resposta.status == 404) {
           window.alert("Deu 404!");
         } else {

@@ -93,9 +93,10 @@
                 descricao: textarea_descricao.value
             })
         }).then(function (resposta) {
-
             if (resposta.ok) {
-                swal("Post atualizado com sucesso!");
+                swal('Sucesso',
+            `Post atualizado pelo usuario: ${sessionStorage.getItem("NOME_USUARIO")}`, 'success'
+          );
                 window.location = "mural.html"
             } else if (resposta.status == 404) {
                 window.alert("Deu 404!");
